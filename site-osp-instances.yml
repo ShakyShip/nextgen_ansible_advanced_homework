@@ -1,7 +1,6 @@
-- name: Create openstack intances
-  hosts: localhost
-  connection: local
+- name: Create openstack intances from isolated nodes
+  hosts: workstation
   become: yes
-  gather_facts: true
+  gather_facts: false
   roles:
    - osp-servers
