@@ -16,5 +16,56 @@
       #!/bin/bash
       cat /root/.ssh/openstack.pub >> /home/cloud-user/.ssh/authorized_keys
       cat /root/.ssh/openstack.pem >> /home/cloud-user/.ssh/authorized_keys
+- name: Create instances app1
+  os_server:
+    cloud: openstack
+    name: "{{osp_servers.app1.name}}"
+    state: "{{osp_servers.app1.state}}"
+    image: "{{osp_servers.app1.image}}"
+    key_name: "{{osp_servers.app1.key_name}}"
+    flavor: "{{osp_servers.app1.flavor}}"
+    security_groups: "{{osp_servers.app1.security_group}}"
+    wait: no
+    nics:
+      - net-name: int_network
+    meta: "{{osp_servers.app1.meta}}"
+    userdata: |
+      #!/bin/bash
+      cat /root/.ssh/openstack.pub >> /home/cloud-user/.ssh/authorized_keys
+      cat /root/.ssh/openstack.pem >> /home/cloud-user/.ssh/authorized_keys
+- name: Create instances app2
+  os_server:
+    cloud: openstack
+    name: "{{osp_servers.app2.name}}"
+    state: "{{osp_servers.app2.state}}"
+    image: "{{osp_servers.app2.image}}"
+    key_name: "{{osp_servers.app2.key_name}}"
+    flavor: "{{osp_servers.app2.flavor}}"
+    security_groups: "{{osp_servers.app2.security_group}}"
+    wait: no
+    nics:
+      - net-name: int_network
+    meta: "{{osp_servers.app2.meta}}"
+    userdata: |
+      #!/bin/bash
+      cat /root/.ssh/openstack.pub >> /home/cloud-user/.ssh/authorized_keys
+      cat /root/.ssh/openstack.pem >> /home/cloud-user/.ssh/authorized_keys
+- name: Create instances db
+  os_server:
+    cloud: openstack
+    name: "{{osp_servers.db.name}}"
+    state: "{{osp_servers.db.state}}"
+    image: "{{osp_servers.db.image}}"
+    key_name: "{{osp_servers.db.key_name}}"
+    flavor: "{{osp_servers.db.flavor}}"
+    security_groups: "{{osp_servers.db.security_group}}"
+    wait: no
+    nics:
+      - net-name: int_network
+    meta: "{{osp_servers.db.meta}}"
+    userdata: |
+      #!/bin/bash
+      cat /root/.ssh/openstack.pub >> /home/cloud-user/.ssh/authorized_keys
+      cat /root/.ssh/openstack.pem >> /home/cloud-user/.ssh/authorized_keys
 
 # tasks file for osp.servers
