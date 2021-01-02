@@ -3,5 +3,6 @@
 - include_tasks: app1.yml
 - include_tasks: app2.yml
 - include_tasks: db.yml
+- include_tasks: floating-ip.yml
 
 # tasks file for osp.servers
