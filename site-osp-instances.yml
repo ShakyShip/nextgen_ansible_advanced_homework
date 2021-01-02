@@ -1,7 +1,7 @@
-- name: Manage openstack intances
-  hosts: workstation
-#  connection: local
+- name: Create openstack intances
+  hosts: localhost
+  connection: local
   become: yes
-  gather_facts: false
+  gather_facts: true
   roles:
    - osp-servers
