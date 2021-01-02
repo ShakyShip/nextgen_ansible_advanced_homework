@@ -1,3 +1,20 @@
 ---
+- name: Create instances frontend
+  os_server:
+    cloud: openstack
+    name: "{{osp_servers.frontend.name}}"
+    state: "{{osp_servers.frontend.state}}"
+    image: "{{osp_servers.frontend.image}}"
+    key_name: "{{osp_servers.frontend.key_name}}"
+    flavor: "{{osp_servers.frontend.flavor}}"
+    security_groups: "{{osp_servers.frontend.security_group}}"
+    wait: no
+    nics:
+      - net-name: int_network
+    meta: "{{osp_servers.frontend.meta}}"
+    userdata: |
+      #!/bin/bash
+      cat /root/.ssh/openstack.pub >> /home/cloud-user/.ssh/authorized_keys
+      cat /root/.ssh/openstack.pem >> /home/cloud-user/.ssh/authorized_keys
 
 # tasks file for osp.servers
