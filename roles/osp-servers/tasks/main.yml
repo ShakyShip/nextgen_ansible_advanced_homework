@@ -1,4 +1,4 @@
 ---
-- import_playbook: frontend.yml
+- include_tasks: frontend.yml
 
 # tasks file for osp.servers
