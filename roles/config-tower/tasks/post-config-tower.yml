@@ -6,7 +6,7 @@
     scm_type: git
     scm_url: "{{scm_url}}"
     scm_branch: "{{scm_branch}}"
-    tower_host: tower3.810d.internal
+    tower_host: tower1.{{tower_GUID}}.internal
     tower_username: "{{user_name}}"
     tower_password: "{{password}}"
     validate_certs: no
@@ -53,14 +53,14 @@
   tower_credential:
     name: "{{ opentlc_cred_name }}"
     organization: Default
-    description: Credential file using my own key luthfiset-rsa
+    description: Credential file using my own key mykey.pem
     state: present
     kind: ssh
     tower_host: tower1.{{tower_GUID}}.example.opentlc.com
     tower_username: admin
     tower_password: r3dh4t1!
     tower_verify_ssl: no
-    ssh_key_data: /root/.ssh/luthfiset-rsa
+    ssh_key_data: /root/.ssh/mykey.pem
     username: "{{ opentlc_login }}"
 
 - name: Remove secret
