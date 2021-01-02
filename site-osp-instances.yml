@@ -1,7 +1,7 @@
 - name: Manage openstack intances
-  hosts: workstation-09fa.dynamic.opentlc.com
-  connection: local
-  become: no
-  gather_facts: true
+  hosts: workstation
+#  connection: local
+  become: yes
+  gather_facts: false
   roles:
    - osp-servers
