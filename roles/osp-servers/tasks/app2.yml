@@ -1,5 +1,5 @@
 ---
-- name: Create instances app2
+- name: Create instance app2
   os_server:
     cloud: openstack
     name: "{{osp_servers.app2.name}}"
@@ -8,6 +8,7 @@
     key_name: "{{osp_servers.app2.key_name}}"
     flavor: "{{osp_servers.app2.flavor}}"
     security_groups: "{{osp_servers.app2.security_group}}"
+    delete_fip: yes
     wait: no
     nics:
       - net-name: int_network
