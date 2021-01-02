@@ -1,4 +1,5 @@
-- hosts: localhost
+- name: Manage openstack intances
+  hosts: workstation-09fa.dynamic.opentlc.com
   connection: local
   become: no
   gather_facts: true
