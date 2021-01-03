@@ -10,7 +10,7 @@
 - name: Delete all QA instances by id
   os_server:
     cloud: openstack
-    id: "{{ item.id }}"
+    name: "{{ item.id }}"
     state: absent
   with_items: "{{result.openstack_servers}}"
    
