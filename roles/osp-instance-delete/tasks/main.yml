@@ -3,6 +3,8 @@
 - name: Fetch Instance Info
   os_server_info:
     cloud: openstack
+    filters: 
+      metadata: "deployment_name=QA"
   register: result
 - debug:
     msg: "{{ result.openstack_servers }}"
