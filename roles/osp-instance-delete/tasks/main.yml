@@ -9,7 +9,7 @@
   register: result
 - name: Delete all QA instances
   os_server:
-    name: "{{ item.id }}"
+    id: "{{ item.id }}"
     state: absent
   with_items: "{{result.openstack_servers}}"
    
