@@ -1,4 +1,14 @@
 ---
+- name: Add appdb1 IP address to app servers /etc/hosts
+  tags:
+    - apps
+    - tomcat
+  lineinfile:
+    dest: /etc/hosts
+    regexp: '.*appdb1$'
+    line: "{{ groups.appdbs[0] }} appdb1"
+    state: present
+
 - name: Create flask user
   tags:
     - apps
