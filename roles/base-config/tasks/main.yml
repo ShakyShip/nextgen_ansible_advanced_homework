@@ -11,7 +11,7 @@
 - name: enable repos
   template: 
     src: repos_template.j2
-    dest: /etc/yum.repos.d/3tier.repo
+    dest: /etc/yum.repos.d/internal.repo
     mode: '0644'
   tags: base-config
  
