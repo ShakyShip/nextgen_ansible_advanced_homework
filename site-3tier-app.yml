@@ -3,17 +3,14 @@
   roles:
   - name: osp-facts
 
-# Setup front-end load balancer tier
+# Setup database tier
 
-
-- name: setup load-balancer tier
-  hosts: frontends
+- name: setup database tier
   become: yes
-#  vars:
-#    ansible_ssh_private_key_file: ~/.ssh/openstack.pem
+  hosts: appdbs
   roles:
     - {name: base-config, tags: base-config}
-    - {name: lb-tier, tags: [lbs, haproxy]}
+    - {name: db-tier, tags: [dbs, postgres]}
 
 # Setup application servers tier
 
@@ -25,11 +22,11 @@
     - {name: base-config, tags: base-config}
     - {name: app-tier, tags: [apps, tomcat]}
 
-# Setup database tier
+# Setup front-end load balancer tier
 
-- name: setup database tier
+- name: setup load-balancer tier
+  hosts: frontends
   become: yes
-  hosts: appdbs
   roles:
     - {name: base-config, tags: base-config}
-    - {name: db-tier, tags: [dbs, postgres]}
+    - {name: lb-tier, tags: [lbs, haproxy]}
