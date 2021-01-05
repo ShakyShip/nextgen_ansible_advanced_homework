@@ -8,7 +8,7 @@
     regexp: '.*appdb1$'
     line: "{{ item.instance-ip-private }} appdb1"
     state: present
-    with_item: "{{ groups.appdbs }}"
+    with_items: "{{ groups.appdbs }}"
 
 - name: Create flask user
   tags:
