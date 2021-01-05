@@ -40,7 +40,7 @@
 
   - name: Fail
     fail:
-    when: "'Ansible' not in qa_webpage.results[0].content" 
+    when: "'N Tier Flask App' not in qa_webpage.results[0].content" 
 
   
 - hosts: localhost
@@ -58,7 +58,7 @@
 
   - name: Fail
     fail:
-    when: "'Ansible' not in prod_webpage.content" 
+    when: "'N Tier Flask App' not in prod_webpage.content" 
 
   - name: Success
     debug: msg="Congrats Yours HW Assignment is completed"
