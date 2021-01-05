@@ -6,7 +6,7 @@
   lineinfile:
     dest: /etc/hosts
     regexp: '.*appdb1$'
-    line: "{{ groups.appdbs[0] }} appdb1"
+    line: "{{ groups.appdbs[0].instance-ip-private }} appdb1"
     state: present
 
 - name: Create flask user
