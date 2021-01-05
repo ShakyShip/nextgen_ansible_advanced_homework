@@ -6,9 +6,8 @@
   lineinfile:
     dest: /etc/hosts
     regexp: '.*appdb1$'
-    line: "{{ item.instance-ip-private }} appdb1"
+    line: "{{ hostvars['appdbs'].instance-ip-private }} appdb1"
     state: present
-  with_items: "{{ groups.appdbs }}"
 
 - name: Create flask user
   tags:
