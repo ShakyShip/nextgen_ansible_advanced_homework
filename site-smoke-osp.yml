@@ -1,11 +1,51 @@
-- hosts: workstation
-  gather_facts: false
-  tasks:
-  - name: OpenStack servers
-  - name: Curl website
+---
+- name: Gather openstack servers and Add host
+  hosts: workstation
+  gather_facts: true
+  roles:
+  - name: osp-facts
 
-  - name: Fail if 'Ansible has done its job' is not in the page content
-    fail:
-    when: "'Ansible has done its job' not in webpage.results[0].content"
-    tags:
-      - osp.smoke
+- name: End to end smoke tests
+  hosts: apps:appdbs
+  gather_facts: true
+  become: true
+  tags:
+    - smoketest  
+  tasks:
+    - name: Show server ip address
+      debug:
+        msg: 
+          - "IP is {{ hostvars[groups.appdbs[0]]['ansible_default_ipv4']['address'] }}"
+          - "First App server  {{ groups.apps[0] }}" 
+          - "Second App server  {{ groups.apps[1] }}" 
+        verbosity: 2 
+        
+    - name: Smoketest Postgres database from app1
+      postgresql_ping:
+        db: flask_db
+        login_host: "{{ hostvars[groups.appdbs[0]]['ansible_default_ipv4']['address'] }}"
+        login_user: flask
+        login_password: redhat
+        ssl_mode: disable
+      delegate_to: "{{ groups.apps[0] }}"
+      run_once: true
+      tags:
+        - smoketest
+
+- name: End to end smoke tests
+  hosts: apps
+  become: false
+  gather_facts: false
+  tags:
+    - smoketest  
+  tasks:
+ 
+    - name: Check webserver for correct response
+      uri:
+        url: "http://{{ groups.frontends[0] }}/ping"
+        return_content: yes
+      until: '"alive" in result.content'
+      retries: 10
+      delay: 1
+      register: result
+      delegate_to: localhost
